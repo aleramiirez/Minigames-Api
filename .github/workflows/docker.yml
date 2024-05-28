@@ -39,11 +39,11 @@ jobs:
 #          docker build -t aleramiirez/minigames:api-gateway .
 #          docker push aleramiirez/minigames:api-gateway
 
-      - name: Build and push Docker images for register-service
+      - name: Build and push Docker images for login-service
         run: |
-          cd register-service
-          docker build -t aleramiirez/minigames:register-service .
-          docker push aleramiirez/minigames:register-service
+          cd login-service
+          docker build -t aleramiirez/minigames:login-service .
+          docker push aleramiirez/minigames:login-service
 
 
 #      - name: Build and push Docker images for discovery-server
