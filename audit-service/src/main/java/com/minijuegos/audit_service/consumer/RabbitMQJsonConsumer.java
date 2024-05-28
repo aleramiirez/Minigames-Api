@@ -23,8 +23,7 @@ public class RabbitMQJsonConsumer {
         this.auditingMngm = auditingMngm;
     }
 
-    @RabbitListener(queues = {"${rabbitmq.queue.json.name}",
-            "${rabbitmq.queue.json.login.name}"})
+    @RabbitListener(queues = {"${rabbitmq.queue.json.name}"})
     public void consumJsonMessage(@Payload String auditingData) {
 
         String[] data = auditingData.split(",");
