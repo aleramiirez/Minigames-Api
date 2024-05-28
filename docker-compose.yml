@@ -17,13 +17,13 @@ services:
     networks:
       - minigames
 
-  api-gateway:
-    container_name: api-gateway
-    image: aleramiirez/minigames:api-gateway
-    ports:
-      - 8080:8080
-    networks:
-      - minigames
+#  api-gateway:
+#    container_name: api-gateway
+#    image: aleramiirez/minigames:api-gateway
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - minigames
 
 #  discovery-server:
 #    container_name: discovery-server

@@ -34,11 +34,11 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
 
-      - name: Build and push Docker images for api-gateway
-        run: |
-          cd api-gateway
-          docker build -t aleramiirez/minigames:api-gateway .
-          docker push aleramiirez/minigames:api-gateway
+#      - name: Build and push Docker images for api-gateway
+#        run: |
+#          cd api-gateway
+#          docker build -t aleramiirez/minigames:api-gateway .
+#          docker push aleramiirez/minigames:api-gateway
 
       - name: Build and push Docker images for register-service
         run: |
@@ -47,11 +47,11 @@ jobs:
           docker push aleramiirez/minigames:register-service
 
 
-      #- name: Build and push Docker images for discovery-server
-      #  run: |
-      #    cd discovery-server
-      #    docker build -t aleramiirez/minigames:discovery-server .
-      #    docker push aleramiirez/minigames:discovery-server
+#      - name: Build and push Docker images for discovery-server
+#        run: |
+#          cd discovery-server
+#          docker build -t aleramiirez/minigames:discovery-server .
+#          docker push aleramiirez/minigames:discovery-server
 
       - name: Build and push Docker images for audit-service
         run: |
