@@ -1,0 +1,112 @@
+version: '4'
+
+services:
+
+  # RabbitMQ
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.10.5-management
+    hostname: rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+    networks:
+      - minigames
+
+  api-gateway:
+    container_name: api-gateway
+    image: aleramiirez/minigames:api-gateway
+    ports:
+      - 8080:8080
+    networks:
+      - minigames
+
+#  discovery-server:
+#    container_name: discovery-server
+#    image: aleramiirez/minigames:discovery-server
+#    restart: always
+#    ports:
+#      - 8761:8761
+#    environment:
+#      - eureka.instance.hostname=discoveryserver
+#      - eureka.client.serviceUrl.defaultZone=http://discoveryserver:8761/eureka
+#    networks:
+#      - minigames
+
+  minigames-db:
+    container_name: minigames-db
+    image: mysql:5
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=minigames
+      - PMA_HOST=mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 3307:3306
+    networks:
+      - minigames
+
+  minigames-audit-db:
+    container_name: minigames-audit-db
+    image: mysql:5
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=minigames_audit
+      - PMA_HOST=mysql
+    volumes:
+      - mysql-data-audit:/var/lib/mysql
+    ports:
+      - 3308:3306
+    networks:
+      - minigames
+
+  register-service:
+    container_name: register-service
+    image: aleramiirez/minigames:register-service
+    ports:
+      - 8081:8081
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DATABASE_URL=jdbc:mysql://minigames-db:3306/minigames?autoReconnect=true&useSSL=false
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=root
+    depends_on:
+      - minigames-db
+    networks:
+      - minigames
+
+  audit-service:
+    container_name: audit-service
+    image: aleramiirez/minigames:audit-service
+    ports:
+      - 8082:8082
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DATABASE_URL=jdbc:mysql://minigames-audit-db:3306/minigames_audit?autoReconnect=true&useSSL=false
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=root
+    depends_on:
+      - minigames-audit-db
+    networks:
+      - minigames
+
+networks:
+  minigames:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    external: true
+
+  mysql-data-audit:
+    external: true
+
+  rabbit-data:
+    external: true
