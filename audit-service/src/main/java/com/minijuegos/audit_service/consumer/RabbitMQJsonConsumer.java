@@ -26,6 +26,8 @@ public class RabbitMQJsonConsumer {
     @RabbitListener(queues = {"${rabbitmq.queue.json.name}"})
     public void consumJsonMessage(@Payload String auditingData) {
 
+        LOGGER.info(String.format("Received message -> %s", auditingData));
+
         String[] data = auditingData.split(",");
 
         AuditingData auditingData1 = new AuditingData();
