@@ -37,12 +37,9 @@ public class UserServiceImpl implements UserServiceI {
         User user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
 
-        User userRequest = userRepo.findByUsername(usernameRequest)
-                .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
-
         AuditingData auditingData = new AuditingData();
 
-        auditingData.setCreatedBy(userRequest.getUsername());
+        auditingData.setCreatedBy(usernameRequest);
         auditingData.setCreatedDate(LocalDateTime.now());
         auditingData.setTypeRequest("api/v1/users/getUser/" + username);
 
