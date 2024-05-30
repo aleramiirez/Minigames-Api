@@ -44,12 +44,11 @@ jobs:
           docker build -t aleramiirez/minigames:login-service .
           docker push aleramiirez/minigames:login-service
 
-
-#      - name: Build and push Docker images for discovery-server
-#        run: |
-#          cd discovery-server
-#          docker build -t aleramiirez/minigames:discovery-server .
-#          docker push aleramiirez/minigames:discovery-server
+      - name: Build and push Docker images for discovery-server
+        run: |
+          cd discovery-server
+          docker build -t aleramiirez/minigames:discovery-server .
+          docker push aleramiirez/minigames:discovery-server
 
       - name: Build and push Docker images for audit-service
         run: |

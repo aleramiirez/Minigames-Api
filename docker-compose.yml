@@ -17,26 +17,6 @@ services:
     networks:
       - minigames
 
-#  api-gateway:
-#    container_name: api-gateway
-#    image: aleramiirez/minigames:api-gateway
-#    ports:
-#      - 8080:8080
-#    networks:
-#      - minigames
-
-#  discovery-server:
-#    container_name: discovery-server
-#    image: aleramiirez/minigames:discovery-server
-#    restart: always
-#    ports:
-#      - 8761:8761
-#    environment:
-#      - eureka.instance.hostname=discoveryserver
-#      - eureka.client.serviceUrl.defaultZone=http://discoveryserver:8761/eureka
-#    networks:
-#      - minigames
-
   minigames-db:
     container_name: minigames-db
     image: mysql:5
@@ -117,6 +97,18 @@ services:
     image: aleramiirez/minigames:api-gateway
     ports:
       - 8080:8080
+    networks:
+      - minigames
+
+  discovery-server:
+    container_name: discovery-server
+    image: aleramiirez/minigames:discovery-server
+    restart: always
+    ports:
+      - 8761:8761
+    environment:
+      - eureka.instance.hostname=discoveryserver
+      - eureka.client.serviceUrl.defaultZone=http://discoveryserver:8761/eureka
     networks:
       - minigames
 
