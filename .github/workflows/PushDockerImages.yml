@@ -58,3 +58,9 @@ jobs:
           docker build -t aleramiirez/minigames:audit-service .
           docker push aleramiirez/minigames:audit-service
 
+      - name: Build and push Docker images for user-functions
+        run: |
+          cd user-functions
+          docker build -t aleramiirez/minigames:user-functions .
+          docker push aleramiirez/minigames:user-functions
+

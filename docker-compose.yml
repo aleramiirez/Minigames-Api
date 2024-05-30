@@ -82,6 +82,21 @@ services:
     networks:
       - minigames
 
+  user-functions:
+    container_name: user-functions
+    image: aleramiirez/minigames:user-functions
+    ports:
+      - 8082:8082
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DATABASE_URL=jdbc:mysql://minigames-db:3306/minigames?autoReconnect=true&useSSL=false
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=root
+    depends_on:
+      - minigames-db
+    networks:
+      - minigames
+
   audit-service:
     container_name: audit-service
     image: aleramiirez/minigames:audit-service

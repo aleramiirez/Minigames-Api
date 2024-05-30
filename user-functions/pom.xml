@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.minijuegos</groupId>
-	<artifactId>userfunctions</artifactId>
+	<artifactId>user-functions</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>userfunctions</name>
 	<description>Servicio para funciones del usuario</description>
