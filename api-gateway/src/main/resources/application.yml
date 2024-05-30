@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: login-service
+
+          # URL para despliege en local
+          # uri: http://localhost:8081
+
+          # URL para despliegue con docker-compose
+          uri: http://login-service:8081
+
+          predicates:
+            - Path=/auth/**
+
+        - id: user-functions
+
+          # URL para despliege en local
+          # uri: http://localhost:8082
+
+          # URL para despliegue con docker-compose
+          uri: http://user-functions:8083
+
+          predicates:
+            - Path=/api/v1/users/**
+          filters:
+            - AuthenticationFilter

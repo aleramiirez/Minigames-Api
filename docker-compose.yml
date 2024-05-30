@@ -112,6 +112,14 @@ services:
     networks:
       - minigames
 
+  api-gateway:
+    container_name: api-gateway
+    image: aleramiirez/minigames:api-gateway
+    ports:
+      - 8080:8080
+    networks:
+      - minigames
+
 networks:
   minigames:
     driver: bridge
