@@ -1,4 +1,3 @@
-
 name: Push Docker images to Hub
 
 on:
