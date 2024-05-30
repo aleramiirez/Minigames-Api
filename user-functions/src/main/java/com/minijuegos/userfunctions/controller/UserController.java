@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 @CrossOrigin
 public class UserController {
 
@@ -19,7 +19,7 @@ public class UserController {
         this.userMngm = userMngm;
     }
 
-    @PostMapping("/getUser/{usename}")
+    @PostMapping("/getUser/{username}")
     public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
         try {
             UserDto user = userMngm.getUserByUsername(username);
