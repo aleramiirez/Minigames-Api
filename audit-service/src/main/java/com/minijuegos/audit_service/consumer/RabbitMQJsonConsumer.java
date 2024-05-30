@@ -10,6 +10,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class RabbitMQJsonConsumer {
@@ -23,7 +24,8 @@ public class RabbitMQJsonConsumer {
         this.auditingMngm = auditingMngm;
     }
 
-    @RabbitListener(queues = {"${rabbitmq.queue.json.name}"})
+    @RabbitListener(queues = {"${rabbitmq.queue.json.name}",
+                                "${rabbitmq.queue.users.name}"})
     public void consumJsonMessage(@Payload String auditingData) {
 
         LOGGER.info(String.format("Received message -> %s", auditingData));
@@ -32,7 +34,7 @@ public class RabbitMQJsonConsumer {
 
         AuditingData auditingData1 = new AuditingData();
         auditingData1.setCreatedBy(data[1]);
-        auditingData1.setCreatedDate(LocalDate.parse(data[2]));
+        auditingData1.setCreatedDate(LocalDateTime.parse(data[2]));
         auditingData1.setTypeRequest(data[3]);
 
         auditingMngm.saveAudit(auditingData1);

@@ -25,6 +25,7 @@
 	<modules>
 		<module>login-service</module>
 		<module>audit-service</module>
+		<module>userfunctions</module>
 	</modules>
 
 	<dependencies>
