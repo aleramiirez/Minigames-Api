@@ -20,9 +20,10 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{username}")
-    public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
+    public ResponseEntity<UserDto> getByUsername(@PathVariable String username,
+                                                 @RequestBody String usernameRequest) {
         try {
-            UserDto user = userMngm.getUserByUsername(username);
+            UserDto user = userMngm.getUserByUsername(username, usernameRequest);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);

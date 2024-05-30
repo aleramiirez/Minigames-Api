@@ -4,11 +4,14 @@ package com.minijuegos.userfunctions.services;
 import com.minijuegos.userfunctions.exceptions.EmptyFieldException;
 import com.minijuegos.userfunctions.exceptions.UserNotFoundException;
 import com.minijuegos.userfunctions.persistence.dto.UserDto;
+import com.minijuegos.userfunctions.persistence.model.AuditingData;
 import com.minijuegos.userfunctions.persistence.model.User;
 import com.minijuegos.userfunctions.persistence.repository.UserRepositoryI;
 import com.minijuegos.userfunctions.published.RabbitMQUsersProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class UserServiceImpl implements UserServiceI {
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public UserDto getUserByUsername(String username) {
+    public UserDto getUserByUsername(String username, String usernameRequest) {
 
         if (username.isEmpty() || username.isBlank()) {
 
@@ -33,6 +36,17 @@ public class UserServiceImpl implements UserServiceI {
 
         User user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
+
+        User userRequest = userRepo.findByUsername(usernameRequest)
+                .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
+
+        AuditingData auditingData = new AuditingData();
+
+        auditingData.setCreatedBy(userRequest.getUsername());
+        auditingData.setCreatedDate(LocalDateTime.now());
+        auditingData.setTypeRequest("api/v1/users/getUser/" + username);
+
+        rabbitMQUsersProducer.sendUsersMessage(auditingData.toString());
 
         return convertToDto(user);
     }
