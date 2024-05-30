@@ -63,3 +63,8 @@ jobs:
           docker build -t aleramiirez/minigames:user-functions .
           docker push aleramiirez/minigames:user-functions
 
+      - name: Build and push Docker images for api-gateway
+        run: |
+          cd api-gateway
+          docker build -t aleramiirez/minigames:api-gateway .
+          docker push aleramiirez/minigames:api-gateway
