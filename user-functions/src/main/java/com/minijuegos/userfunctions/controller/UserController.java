@@ -19,7 +19,7 @@ public class UserController {
         this.userMngm = userMngm;
     }
 
-    @PostMapping("/getUser/{username}")
+    @GetMapping("/getUser/{username}")
     public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
         try {
             UserDto user = userMngm.getUserByUsername(username);
