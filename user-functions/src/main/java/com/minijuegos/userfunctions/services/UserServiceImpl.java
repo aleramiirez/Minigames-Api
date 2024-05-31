@@ -39,6 +39,17 @@ public class UserServiceImpl implements UserServiceI {
         return convertToDto(user);
     }
 
+    @Override
+    public void levelUp(String username) {
+
+        User user = userRepo.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
+
+        user.setLevel(user.getLevel() + 1);
+
+        userRepo.save(user);
+    }
+
     /**
      * Convierte un objeto User en un objeto UserDto.
      *
