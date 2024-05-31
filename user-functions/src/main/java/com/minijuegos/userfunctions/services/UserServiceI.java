@@ -6,6 +6,6 @@ public interface UserServiceI {
 
     UserDto getUserByUsername(String username);
 
-    int levelUp(String username);
+    String levelUp(String username);
 
 }

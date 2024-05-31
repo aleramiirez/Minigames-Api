@@ -31,9 +31,9 @@ public class UserController {
     }
 
     @PutMapping("/levelUp/{username}")
-    public ResponseEntity<Integer> levelUp(@PathVariable String username) {
+    public ResponseEntity<String> levelUp(@PathVariable String username) {
         try {
-            int level = userMngm.levelUp(username);
+            String level = userMngm.levelUp(username);
             return new ResponseEntity<>(level, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);

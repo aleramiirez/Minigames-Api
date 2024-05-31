@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public int levelUp(String username) {
+    public String levelUp(String username) {
 
         User user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserServiceI {
 
         userRepo.save(user);
 
-        return user.getLevel();
+        return String.valueOf(user.getLevel());
     }
 
     /**
