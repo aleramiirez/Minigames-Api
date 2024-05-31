@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserServiceI {
 
         String[] usernameData = auditingData.getCreatedBy().split(":");
 
-        usernameData[1].replace("\"", "");
+        usernameData[1].replace("\"", "").trim();
 
         auditingData.setCreatedBy(usernameData[1]);
 
