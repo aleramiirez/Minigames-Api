@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public UserDto getUserByUsername(String username, String usernameRequest) {
+    public UserDto getUserByUsername(String username) {
 
         if (username.isEmpty() || username.isBlank()) {
 
@@ -35,20 +35,6 @@ public class UserServiceImpl implements UserServiceI {
 
         User user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
-
-        AuditingData auditingData = new AuditingData();
-
-        auditingData.setCreatedBy(usernameRequest);
-        auditingData.setCreatedDate(LocalDateTime.now());
-        auditingData.setTypeRequest("api/v1/users/getUser/" + username);
-
-        String[] usernameData = auditingData.getCreatedBy().split(":");
-
-        usernameData[1].replace("\"", "").trim();
-
-        auditingData.setCreatedBy(usernameData[1]);
-
-        rabbitMQUsersProducer.sendUsersMessage(auditingData.toString());
 
         return convertToDto(user);
     }
