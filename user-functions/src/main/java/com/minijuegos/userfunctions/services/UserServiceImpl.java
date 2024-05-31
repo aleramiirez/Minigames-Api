@@ -42,10 +42,13 @@ public class UserServiceImpl implements UserServiceI {
         auditingData.setCreatedDate(LocalDateTime.now());
         auditingData.setTypeRequest("api/v1/users/getUser/" + username);
 
-        String auditingDataJson = auditingData.getCreatedBy() + "," + auditingData.getCreatedDate() + "," +
-                auditingData.getTypeRequest();
+        String[] usernameData = auditingData.getCreatedBy().split(":");
 
-        rabbitMQUsersProducer.sendUsersMessage(auditingDataJson);
+        usernameData[1].replace("\"", "");
+
+        auditingData.setCreatedBy(usernameData[1]);
+
+        rabbitMQUsersProducer.sendUsersMessage(auditingData.toString());
 
         return convertToDto(user);
     }
