@@ -8,7 +8,7 @@ spring:
           # uri: http://localhost:8081
 
           # URL para despliegue con docker-compose
-          uri: lb://login-service
+          uri: lb://login-service:8081
 
           predicates:
             - Path=/auth/**
@@ -19,7 +19,7 @@ spring:
           # uri: http://localhost:8082
 
           # URL para despliegue con docker-compose
-          uri: lb://user-functions
+          uri: lb://user-functions:8083
 
           predicates:
             - Path=/api/v1/users/**
@@ -27,4 +27,4 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone : http://discovery-server:8761/eureka/
+      defaultZone : http://discoveryclient:8761/eureka/
