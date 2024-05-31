@@ -10,7 +10,6 @@ import com.minijuegos.userfunctions.persistence.repository.UserRepositoryI;
 import com.minijuegos.userfunctions.published.RabbitMQUsersProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 
 @Service
@@ -43,7 +42,10 @@ public class UserServiceImpl implements UserServiceI {
         auditingData.setCreatedDate(LocalDateTime.now());
         auditingData.setTypeRequest("api/v1/users/getUser/" + username);
 
-        rabbitMQUsersProducer.sendUsersMessage(auditingData.toString());
+        String auditingDataJson = auditingData.getCreatedBy() + "," + auditingData.getCreatedDate() + "," +
+                auditingData.getTypeRequest();
+
+        rabbitMQUsersProducer.sendUsersMessage(auditingDataJson);
 
         return convertToDto(user);
     }
