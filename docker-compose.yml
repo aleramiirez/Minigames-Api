@@ -107,7 +107,7 @@ services:
     ports:
       - 8761:8761
     environment:
-      - eureka.instance.hostname=discoveryserver
+      - eureka.instance.hostname=discovery-server
       - eureka.client.serviceUrl.defaultZone=http://discovery-server:8761/eureka
     networks:
       - minigames
