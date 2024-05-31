@@ -8,7 +8,7 @@ spring:
           # uri: http://localhost:8081
 
           # URL para despliegue con docker-compose
-          uri: lb://login-service:8081
+          uri: lb://login-service
 
           predicates:
             - Path=/auth/**
@@ -19,7 +19,7 @@ spring:
           # uri: http://localhost:8082
 
           # URL para despliegue con docker-compose
-          uri: lb://user-functions:8083
+          uri: lb://user-functions
 
           predicates:
             - Path=/api/v1/users/**
