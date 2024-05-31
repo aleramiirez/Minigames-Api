@@ -39,5 +39,4 @@ public class UserController {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
     }
-
 }
