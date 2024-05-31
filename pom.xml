@@ -23,11 +23,11 @@
 	</properties>
 
 	<modules>
+		<module>discovery-server</module>
+		<module>api-gateway</module>
 		<module>login-service</module>
 		<module>audit-service</module>
 		<module>user-functions</module>
-		<module>api-gateway</module>
-		<module>discovery-server</module>
 	</modules>
 
 	<dependencies>
