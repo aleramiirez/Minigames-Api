@@ -22,4 +22,4 @@
 
 ## Documentación
 
-Este proyecto esta conmentado con wikis. Para verlo dirigete a [Wiki](https://github.com/aleramiirez/MiniJuegos/wiki)
+Este proyecto esta conmentado con wikis. Para verlo dirigete a [Wiki](https://github.com/aleramiirez/Minigames-Api/wiki)
