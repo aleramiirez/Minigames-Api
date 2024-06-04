@@ -1,7 +1,7 @@
 # Minijuegos API
 
 <div align="center">
-  <img src="https://github.com/aleramiirez/Minigames-Api/assets/121113496/617a363d-5bd3-427d-ae4a-a311ab42be83" alt="Proyecto" width="500"/>
+  <img src="https://github.com/aleramiirez/Minigames-Api/assets/121113496/617a363d-5bd3-427d-ae4a-a311ab42be83" alt="Proyecto" width="400"/>
 </div>
 
 ## Instalación
