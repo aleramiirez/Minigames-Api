@@ -24,14 +24,6 @@ spec:
       targetPort: 8082
       protocol: TCP
       name: audit-services
-    - port: 5672
-      targetPort: 5672
-      protocol: TCP
-      name: rabbitmq
-    - port: 15672
-      targetPort: 15672
-      protocol: TCP
-      name: rabbitmq-management
   type: LoadBalancer
   selector:
     app: micros
