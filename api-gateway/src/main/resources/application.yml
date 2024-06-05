@@ -8,7 +8,7 @@ spring:
           # uri: http://localhost:8081
 
           # URL para despliegue con docker-compose
-          uri: lb://login-service
+          uri: http://nlb-service.resultados-space.svc.cluster.local:8081
 
           predicates:
             - Path=/auth/**
@@ -19,7 +19,7 @@ spring:
           # uri: http://localhost:8082
 
           # URL para despliegue con docker-compose
-          uri: lb://user-functions
+          uri: http://nlb-service.resultados-space.svc.cluster.local:8083
 
           predicates:
             - Path=/api/v1/users/**

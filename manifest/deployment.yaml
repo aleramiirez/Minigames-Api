@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-services
+  labels:
+    app: micros
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: micros
+  template:
+    metadata:
+      labels:
+        app: micros
+    spec:
+      containers:
+        - name: discovery-server
+          image: aleramiirez/minigames:discovery-server-v.0.1
+          ports:
+            - containerPort: 8761
+          env:
+            - name: AUDIT_API
+              value: http://nlb-service:8761
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+        - name: api-gateway
+          image: aleramiirez/minigames:api-gateway-v.0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: AUDIT_API
+              value: http://nlb-service:8080
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+        - name: rabbitmq
+          image: rabbitmq:3.10.5-management
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+        - name: login-service
+          image: aleramiirez/minigames:login-service-v.0.1
+          ports:
+            - containerPort: 8081
+          env:
+            - name: AUDIT_API
+              value: http://nlb-service:8081
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+            - name: DATABASE_URL
+              value: jdbc:mysql://minigames-sql-server.mysql.database.azure.com:3306/minigames?useSSL=true
+            - name: DATABASE_USERNAME
+              value: minigames
+            - name: DATABASE_PASSWORD
+              value: Tfgvedruna2024
+        - name: user-functions
+          image: aleramiirez/minigames:user-functions-v.0.1
+          ports:
+            - containerPort: 8083
+          env:
+            - name: AUDIT_API
+              value: http://nlb-service:8081
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+            - name: DATABASE_URL
+              value: jdbc:mysql://minigames-sql-server.mysql.database.azure.com:3306/minigames?useSSL=true
+            - name: DATABASE_USERNAME
+              value: minigames
+            - name: DATABASE_PASSWORD
+              value: Tfgvedruna2024
+        - name: audit-service
+          image: aleramiirez/minigames:audit-service-v.0.1
+          ports:
+            - containerPort: 8082
+          env:
+            - name: AUDIT_API
+              value: http://nlb-service:8082
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+            - name: DATABASE_URL
+              value: jdbc:mysql://minigames-sql-server.mysql.database.azure.com:3306/minigames_audit?useSSL=true
+            - name: DATABASE_USERNAME
+              value: minigames
+            - name: DATABASE_PASSWORD
+              value: Tfgvedruna2024
