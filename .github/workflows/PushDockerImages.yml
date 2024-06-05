@@ -36,32 +36,32 @@ jobs:
       - name: Build and push Docker images for login-service
         run: |
           cd login-service
-          docker build -t aleramiirez/minigames:login-service-v.0.6 .
-          docker push aleramiirez/minigames:login-service-v.0.6
+          docker build -t aleramiirez/minigames:login-service-v.0.7 .
+          docker push aleramiirez/minigames:login-service-v.0.7
 
       - name: Build and push Docker images for discovery-server
         run: |
           cd discovery-server
-          docker build -t aleramiirez/minigames:discovery-server-v.0.6 .
-          docker push aleramiirez/minigames:discovery-server-v.0.6
+          docker build -t aleramiirez/minigames:discovery-server-v.0.7 .
+          docker push aleramiirez/minigames:discovery-server-v.0.7
 
       - name: Build and push Docker images for audit-service
         run: |
           cd audit-service
-          docker build -t aleramiirez/minigames:audit-service-v.0.6 .
-          docker push aleramiirez/minigames:audit-service-v.0.6
+          docker build -t aleramiirez/minigames:audit-service-v.0.7 .
+          docker push aleramiirez/minigames:audit-service-v.0.7
 
       - name: Build and push Docker images for user-functions
         run: |
           cd user-functions
-          docker build -t aleramiirez/minigames:user-functions-v.0.6 .
-          docker push aleramiirez/minigames:user-functions-v.0.6
+          docker build -t aleramiirez/minigames:user-functions-v.0.7 .
+          docker push aleramiirez/minigames:user-functions-v.0.7
 
       - name: Build and push Docker images for api-gateway
         run: |
           cd api-gateway
-          docker build -t aleramiirez/minigames:api-gateway-v.0.6 .
-          docker push aleramiirez/minigames:api-gateway-v.0.6
+          docker build -t aleramiirez/minigames:api-gateway-v.0.7 .
+          docker push aleramiirez/minigames:api-gateway-v.0.7
 
       # Deploy to Kubernetes
       - name: Configure kubectl
