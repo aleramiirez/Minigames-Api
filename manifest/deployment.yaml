@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: aleramiirez/minigames:api-gateway-v.0.12
+          image: aleramiirez/minigames:api-gateway-v.0.13
           ports:
             - containerPort: 8080
           env:
@@ -25,7 +25,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: docker
         - name: login-service
-          image: aleramiirez/minigames:login-service-v.0.12
+          image: aleramiirez/minigames:login-service-v.0.13
           ports:
             - containerPort: 8081
           env:
@@ -40,7 +40,7 @@ spec:
             - name: DATABASE_PASSWORD
               value: Tfgvedruna2024
         - name: user-functions
-          image: aleramiirez/minigames:user-functions-v.0.12
+          image: aleramiirez/minigames:user-functions-v.0.13
           ports:
             - containerPort: 8083
           env:
@@ -55,7 +55,7 @@ spec:
             - name: DATABASE_PASSWORD
               value: Tfgvedruna2024
         - name: audit-service
-          image: aleramiirez/minigames:audit-service-v.0.12
+          image: aleramiirez/minigames:audit-service-v.0.13
           ports:
             - containerPort: 8082
           env:
