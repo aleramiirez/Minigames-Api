@@ -4,25 +4,20 @@ package com.minijuegos.userfunctions.services;
 import com.minijuegos.userfunctions.exceptions.EmptyFieldException;
 import com.minijuegos.userfunctions.exceptions.UserNotFoundException;
 import com.minijuegos.userfunctions.persistence.dto.UserDto;
-import com.minijuegos.userfunctions.persistence.model.AuditingData;
 import com.minijuegos.userfunctions.persistence.model.User;
 import com.minijuegos.userfunctions.persistence.repository.UserRepositoryI;
-import com.minijuegos.userfunctions.published.RabbitMQUsersProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
 
 @Service
 public class UserServiceImpl implements UserServiceI {
 
     private final UserRepositoryI userRepo;
 
-    private final RabbitMQUsersProducer rabbitMQUsersProducer;
 
     @Autowired
-    public UserServiceImpl(UserRepositoryI userRepo, RabbitMQUsersProducer rabbitMQUsersProducer) {
+    public UserServiceImpl(UserRepositoryI userRepo) {
         this.userRepo = userRepo;
-        this.rabbitMQUsersProducer = rabbitMQUsersProducer;
     }
 
     @Override

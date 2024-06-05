@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: discovery-server
-          image: aleramiirez/minigames:discovery-server-v.0.11
+          image: aleramiirez/minigames:discovery-server-v.0.12
           ports:
             - containerPort: 8761
           env:
