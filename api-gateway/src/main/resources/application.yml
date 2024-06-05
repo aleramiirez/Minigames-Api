@@ -27,4 +27,4 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone : nlb-service:8761/eureka/
+      defaultZone : http://nlb-service:8761/eureka/
