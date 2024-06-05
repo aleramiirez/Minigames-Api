@@ -12,32 +12,32 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Service
+// @Service
 public class RabbitMQJsonConsumer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQJsonConsumer.class);
-
-    private final AuditingServiceImpl auditingMngm;
-
-    @Autowired
-    public RabbitMQJsonConsumer(AuditingServiceImpl auditingMngm) {
-        this.auditingMngm = auditingMngm;
-    }
-
-    @RabbitListener(queues = {"${rabbitmq.queue.json.name}"})
-    public void consumJsonMessage(@Payload String auditingData) {
-
-        LOGGER.info(String.format("Received message -> %s", auditingData));
-
-        String[] data = auditingData.split(",");
-
-        AuditingData auditingData1 = new AuditingData();
-        auditingData1.setCreatedBy(data[1]);
-        auditingData1.setCreatedDate(LocalDateTime.parse(data[2]));
-        auditingData1.setTypeRequest(data[3]);
-
-        auditingMngm.saveAudit(auditingData1);
-
-    }
+//     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQJsonConsumer.class);
+//
+//     private final AuditingServiceImpl auditingMngm;
+//
+//     @Autowired
+//     public RabbitMQJsonConsumer(AuditingServiceImpl auditingMngm) {
+//         this.auditingMngm = auditingMngm;
+//     }
+//
+//     @RabbitListener(queues = {"${rabbitmq.queue.json.name}"})
+//     public void consumJsonMessage(@Payload String auditingData) {
+//
+//         LOGGER.info(String.format("Received message -> %s", auditingData));
+//
+//         String[] data = auditingData.split(",");
+//
+//         AuditingData auditingData1 = new AuditingData();
+//         auditingData1.setCreatedBy(data[1]);
+//         auditingData1.setCreatedDate(LocalDateTime.parse(data[2]));
+//         auditingData1.setTypeRequest(data[3]);
+//
+//         auditingMngm.saveAudit(auditingData1);
+//
+//     }
 
 }
