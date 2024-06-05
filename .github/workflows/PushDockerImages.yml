@@ -48,7 +48,7 @@ jobs:
       - name: Build and push Docker images for audit-service
         run: |
           cd audit-service
-          docker buildx build -t aleramiirez/minigames:audit-service-v.0.6
+          docker build -t aleramiirez/minigames:audit-service-v.0.6
           docker push aleramiirez/minigames:audit-service-v.0.6
 
       - name: Build and push Docker images for user-functions
