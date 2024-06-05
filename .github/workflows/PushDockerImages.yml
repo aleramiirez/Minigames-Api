@@ -71,5 +71,5 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f microdeployment.yaml -n resultados-space
-          kubectl apply -f microservices.yaml -n resultados-space
+          kubectl apply -f deployment.yaml -n minigames
+          kubectl apply -f services.yaml -n minigames
