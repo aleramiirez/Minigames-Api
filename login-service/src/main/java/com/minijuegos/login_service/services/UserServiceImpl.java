@@ -24,16 +24,16 @@ public class UserServiceImpl implements UserServiceI {
 
     private final UserRepositoryI userRepo;
 
-    private final RabbitMQJsonProducer rabbitMQProducer;
+    //private final RabbitMQJsonProducer rabbitMQProducer;
 
     private final RestClient restClient;
 
     @Autowired
     public UserServiceImpl(UserRepositoryI userRepo,
-                           RabbitMQJsonProducer rabbitMQProducer,
+                           //RabbitMQJsonProducer rabbitMQProducer,
                            RestClient restClient) {
         this.userRepo = userRepo;
-        this.rabbitMQProducer = rabbitMQProducer;
+        //this.rabbitMQProducer = rabbitMQProducer;
         this.restClient = restClient;
     }
 
