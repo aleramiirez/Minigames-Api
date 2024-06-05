@@ -1,6 +1,7 @@
 package com.minijuegos.userfunctions.controller;
 
 import com.minijuegos.userfunctions.persistence.dto.UserDto;
+import com.minijuegos.userfunctions.persistence.model.User;
 import com.minijuegos.userfunctions.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,14 +21,22 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{username}")
-    public ResponseEntity<UserDto> getByUsername(@PathVariable String username,
-                                                 @RequestBody String usernameRequest) {
+    public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
         try {
-            UserDto user = userMngm.getUserByUsername(username, usernameRequest);
+            UserDto user = userMngm.getUserByUsername(username);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
     }
 
+    @PutMapping("/levelUp/{username}")
+    public ResponseEntity<String> levelUp(@PathVariable String username) {
+        try {
+            String level = userMngm.levelUp(username);
+            return new ResponseEntity<>(level, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        }
+    }
 }

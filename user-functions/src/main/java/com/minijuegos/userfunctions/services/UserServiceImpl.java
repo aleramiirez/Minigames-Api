@@ -10,7 +10,6 @@ import com.minijuegos.userfunctions.persistence.repository.UserRepositoryI;
 import com.minijuegos.userfunctions.published.RabbitMQUsersProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 
 @Service
@@ -27,7 +26,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public UserDto getUserByUsername(String username, String usernameRequest) {
+    public UserDto getUserByUsername(String username) {
 
         if (username.isEmpty() || username.isBlank()) {
 
@@ -37,15 +36,20 @@ public class UserServiceImpl implements UserServiceI {
         User user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
 
-        AuditingData auditingData = new AuditingData();
-
-        auditingData.setCreatedBy(usernameRequest);
-        auditingData.setCreatedDate(LocalDateTime.now());
-        auditingData.setTypeRequest("api/v1/users/getUser/" + username);
-
-        rabbitMQUsersProducer.sendUsersMessage(auditingData.toString());
-
         return convertToDto(user);
+    }
+
+    @Override
+    public String levelUp(String username) {
+
+        User user = userRepo.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("The user is not register in the data base"));
+
+        user.setLevel(user.getLevel() + 1);
+
+        userRepo.save(user);
+
+        return String.valueOf(user.getLevel());
     }
 
     /**

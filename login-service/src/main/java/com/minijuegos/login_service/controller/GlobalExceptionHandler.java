@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Manejador global de excepciones para la aplicación.
  * Maneja excepciones personalizadas y proporciona respuestas HTTP apropiadas.
@@ -23,8 +26,10 @@ public class GlobalExceptionHandler {
      * @return un ResponseEntity con el mensaje de error y el estado HTTP
      */
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, String>> handleUserNotFoundException(UserNotFoundException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -34,8 +39,10 @@ public class GlobalExceptionHandler {
      * @return un ResponseEntity con el mensaje de error y el estado HTTP
      */
     @ExceptionHandler(UsernameAlreadyExistsException.class)
-    public ResponseEntity<String> handleUsernameAlreadyExistsException(UsernameAlreadyExistsException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    public ResponseEntity<Map<String, String>> handleUsernameAlreadyExistsException(UsernameAlreadyExistsException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
     /**
@@ -45,8 +52,10 @@ public class GlobalExceptionHandler {
      * @return un ResponseEntity con el mensaje de error y el estado HTTP
      */
     @ExceptionHandler(InvalidCredentialsException.class)
-    public ResponseEntity<String> handleInvalidCredentialsException(InvalidCredentialsException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<Map<String, String>> handleInvalidCredentialsException(InvalidCredentialsException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
 
     /**
@@ -56,8 +65,10 @@ public class GlobalExceptionHandler {
      * @return un ResponseEntity con el mensaje de error y el estado HTTP
      */
     @ExceptionHandler(EmptyFieldException.class)
-    public ResponseEntity<String> handleEmptyFieldException(EmptyFieldException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Map<String, String>> handleEmptyFieldException(EmptyFieldException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -67,8 +78,9 @@ public class GlobalExceptionHandler {
      * @return un ResponseEntity con el mensaje de error y el estado HTTP
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGeneralException(Exception ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Map<String, String>> handleGeneralException(Exception ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }
