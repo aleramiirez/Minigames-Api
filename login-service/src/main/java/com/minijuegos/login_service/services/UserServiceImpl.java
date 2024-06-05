@@ -10,6 +10,7 @@ import com.minijuegos.login_service.persistence.model.User;
 import com.minijuegos.login_service.persistence.model.UserRequest;
 import com.minijuegos.login_service.persistence.repository.UserRepositoryI;
 import com.minijuegos.login_service.published.RabbitMQJsonProducer;
+import com.minijuegos.login_service.published.RestClient;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +26,15 @@ public class UserServiceImpl implements UserServiceI {
 
     private final RabbitMQJsonProducer rabbitMQProducer;
 
+    private final RestClient restClient;
+
     @Autowired
-    public UserServiceImpl(UserRepositoryI userRepo, RabbitMQJsonProducer rabbitMQProducer) {
+    public UserServiceImpl(UserRepositoryI userRepo,
+                           RabbitMQJsonProducer rabbitMQProducer,
+                           RestClient restClient) {
         this.userRepo = userRepo;
         this.rabbitMQProducer = rabbitMQProducer;
+        this.restClient = restClient;
     }
 
 
@@ -55,9 +61,7 @@ public class UserServiceImpl implements UserServiceI {
             auditingData.setCreatedDate(LocalDateTime.now());
             auditingData.setTypeRequest("auth/login");
 
-            String data = auditingData.toString();
-
-            rabbitMQProducer.sendJsonMessage(data);
+            restClient.sendAudit(auditingData);
 
             return convertToDto(user);
         } else {
@@ -96,9 +100,7 @@ public class UserServiceImpl implements UserServiceI {
         auditingData.setCreatedDate(LocalDateTime.now());
         auditingData.setTypeRequest("auth/register");
 
-        String data = auditingData.toString();
-
-        rabbitMQProducer.sendJsonMessage(data);
+        restClient.sendAudit(auditingData);
 
         return convertToDto(user);
     }

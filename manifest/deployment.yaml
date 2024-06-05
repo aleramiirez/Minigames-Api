@@ -38,6 +38,9 @@ spec:
           ports:
             - containerPort: 5672
             - containerPort: 15672
+          env:
+            - name: RABBITMQ_USE_LONGNAME
+              value: "true"
         - name: login-service
           image: aleramiirez/minigames:login-service-v.0.2
           ports:

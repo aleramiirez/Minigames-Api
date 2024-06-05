@@ -1,0 +1,14 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: my-rabbitmq-cluster
+spec:
+  replicas: 3
+  rabbitmq:
+    image: rabbitmq:3.10.5-management
+    rabbitmqConfig: |
+      cluster_name = rabbit@rabbitmq-cluster
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "100m"
