@@ -10,14 +10,14 @@ spring:
 
           predicates:
             - Path=/auth/**
-            -
+
         - id: user-functions
 
           uri: http://user-functions:8083
 
           predicates:
             - Path=/api/v1/users/**
-            -
+
 eureka:
   client:
     serviceUrl:
