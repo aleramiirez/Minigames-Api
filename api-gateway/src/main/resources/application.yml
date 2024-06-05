@@ -1,25 +1,27 @@
 spring:
   application:
     name: api-gateway
-
   cloud:
     gateway:
       routes:
         - id: login-service
-          uri: lb://login-service
+
+          uri: http://login-service:8081
+
           predicates:
             - Path=/auth/**
+            -
         - id: user-functions
-          uri: lb://user-functions
+
+          uri: http://user-functions:8083
+
           predicates:
             - Path=/api/v1/users/**
-
+            -
 eureka:
   client:
     serviceUrl:
       defaultZone: http://discovery-server:8761/eureka/
-  instance:
-    preferIpAddress: true
 
 server:
   port: 8080

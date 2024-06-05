@@ -3,11 +3,9 @@ kind: Service
 metadata:
   name: discovery-server
 spec:
+  type: LoadBalancer
   ports:
     - port: 8761
       targetPort: 8761
-      protocol: TCP
-      name: discovery-server
   selector:
     app: discovery-server
-  type: ClusterIP

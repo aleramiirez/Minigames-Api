@@ -16,9 +16,11 @@ spec:
     spec:
       containers:
         - name: discovery-server
-          image: aleramiirez/minigames:discovery-server-v.0.8
+          image: aleramiirez/minigames:discovery-server-v.0.9
           ports:
             - containerPort: 8761
           env:
+            - name: AUDIT_API
+              value: http://discovery-server:8761
             - name: SPRING_PROFILES_ACTIVE
               value: docker
