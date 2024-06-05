@@ -74,4 +74,4 @@ jobs:
           kubectl apply -f manifest/eureka-deployment.yaml -n minigames
           kubectl apply -f manifest/eureka-services.yaml -n minigames
           kubectl apply -f manifest/deployment.yaml -n minigames
-          kubectl apply -f manifest/services.yaml -n minigames
+          kubectl apply -f manifest/service.yaml -n minigames
