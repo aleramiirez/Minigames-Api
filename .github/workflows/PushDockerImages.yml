@@ -71,5 +71,5 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f deployment.yaml -n minigames
-          kubectl apply -f services.yaml -n minigames
+          kubectl apply -f manifest/deployment.yaml -n minigames
+          kubectl apply -f manifest/services.yaml -n minigames
