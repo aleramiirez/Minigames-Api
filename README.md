@@ -11,7 +11,6 @@
 1. Escribe en la terminal el comando `git clone https://github.com/aleramiirez/Minigames-Api.git`
 2. Escribe en la terminal el comando `mvn clean package -DskipTest` para limpiar la aplicación.
 3. Escibe `docker-compose up` para iniciar la aplicación..
-4. Para entrar en la aplicación escribe lo siguiente en el navegador `http://localhost:3000/login`
 
 ## Sin Docker
 
