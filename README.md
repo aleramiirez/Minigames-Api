@@ -15,7 +15,7 @@
 
 ## Sin Docker
 
-1. Escribe en la terminal el comando `git clone https://github.com/anavarroo/GestionGenericaP.git`
+1. Escribe en la terminal el comando `git clone https://github.com/aleramiirez/GestionGenericaP.git`
 3. Escribe en la terminal el comando `mvn clean verify -DskipTest` para entrar en cada carpeta y construit la aplicación.
 4. Despues ejecuta `mvn spring-boot:run` para entrar en cada carpeta y iniciar la aplicación.
 
